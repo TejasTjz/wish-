@@ -1,0 +1,163 @@
+/* ==========================================================================
+   1. CSS VARIABLES & CORE SETUP
+   ========================================================================== */
+:root {
+  --primary-color: #ff4b72;
+  --primary-hover: #ff2a55;
+  --secondary-color: #a1c4fd;
+  --text-dark: #2c3e50;
+  --text-light: #ffffff;
+  --bg-gradient: linear-gradient(-45deg, #ff9a9e, #fecfef, #a1c4fd, #c2e9fb);
+  --card-bg: rgba(255, 255, 255, 0.85);
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+}
+
+/* ==========================================================================
+   2. RESET & BASE STYLES
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: var(--text-dark);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--bg-gradient);
+  background-size: 400% 400%;
+  animation: gradientShift 12s ease infinite;
+  overflow-x: hidden;
+  padding: 20px;
+}
+
+/* Background animation */
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ==========================================================================
+   3. LAYOUT & CONTAINERS
+   ========================================================================== */
+.container {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 40px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+  transition: transform var(--transition-normal);
+}
+
+.container:hover {
+  transform: translateY(-4px);
+}
+
+/* ==========================================================================
+   4. TYPOGRAPHY & INPUTS
+   ========================================================================== */
+h1 {
+  color: var(--primary-color);
+  font-size: 2rem;
+  margin-bottom: 12px;
+}
+
+p {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #555;
+  margin-bottom: 24px;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 12px 20px;
+  border: 2px solid #e0e0e0;
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color var(--transition-fast);
+  margin-bottom: 20px;
+}
+
+input[type="text"]:focus {
+  border-color: var(--primary-color);
+}
+
+/* ==========================================================================
+   5. BUTTONS & INTERACTION
+   ========================================================================== */
+.btn {
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  border: none;
+  padding: 12px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(255, 75, 114, 0.3);
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.btn:hover {
+  background-color: var(--primary-hover);
+  transform: scale(1.05);
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+/* ==========================================================================
+   6. ANIMATED ELEMENTS & UTILITIES
+   ========================================================================== */
+.floating-heart {
+  position: absolute;
+  pointer-events: none;
+  animation: floatUp 2s ease-out forwards;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-120px) scale(1.4);
+    opacity: 0;
+  }
+}
+/* Ensure heart container position matches JS coordinates */
+.floating-heart {
+  position: fixed; /* Keeps heart tied to screen coordinates */
+  pointer-events: none; /* Allows clicks to pass through hearts to buttons */
+  user-select: none;
+  z-index: 9999; /* Displays hearts above all cards and modals */
+  animation: floatUp 2s ease-out forwards;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-120px) scale(1.4);
+    opacity: 0;
+  }
+}
